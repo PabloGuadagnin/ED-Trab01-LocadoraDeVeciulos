@@ -9,6 +9,16 @@ public class Veiculo {
     private int nLugares;
     private String categoria;
 
+    public Veiculo(String placa, String modelo, String marca, int ano, int potencia, int nLugares, String categoria) {
+        this.placa = placa;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.ano = ano;
+        this.potencia = potencia;
+        this.nLugares = nLugares;
+        this.categoria = categoria;
+    }
+
     public String getPlaca() {
         return placa;
     }

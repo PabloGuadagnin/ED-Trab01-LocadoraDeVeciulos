@@ -2,9 +2,16 @@ package Locadora_de_Veiculos;
 
 public class Cliente {
     private String nome;
-    private Long cnh;
+    private long cnh;
     private double telefone;
     private long cpf;
+
+    public Cliente(String nome, long cnh, double telefone, long cpf) {
+        this.nome = nome;
+        this.cnh = cnh;
+        this.telefone = telefone;
+        this.cpf = cpf;
+    }
 
     public String getNome() {
         return nome;
@@ -14,11 +21,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public Long getCnh() {
+    public long getCnh() {
         return cnh;
     }
 
-    public void setCnh(Long cnh) {
+    public void setCnh(long cnh) {
         this.cnh = cnh;
     }
 
