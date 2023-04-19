@@ -28,6 +28,10 @@ public class NohObjetos {
         this.anterior = anterior;
     }
 
+    public Object getObject() {
+        return obj;
+    }
+
     public void setInfo(Object obj) {
         this.obj = obj;
     }
