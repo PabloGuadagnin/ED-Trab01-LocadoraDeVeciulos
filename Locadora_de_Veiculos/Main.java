@@ -21,6 +21,8 @@ public class Main {
         listaClientes.insereFim(cliente2);
 
         listaClientes.procuraClientePorCpf(2);
+        listaClientes.excluiCliente(2);
+        listaClientes.imprimeLista();
 
         // Constroi a lista de Categorias ------------------------------------------
 
@@ -31,8 +33,8 @@ public class Main {
         PreencerVeiculos preencerVeiculos = new PreencerVeiculos();
         PreencheCategorias preencheCategorias = new PreencheCategorias();
 
-        preencheCategorias.preenche();
-        preencerVeiculos.preenche();
+        //preencheCategorias.preenche();
+        //preencerVeiculos.preenche();
 
     }
 }

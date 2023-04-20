@@ -111,4 +111,8 @@ public class ListaClientes {
         System.out.println("Não encontrado");
         return null; // Se não encontrou nenhum cliente com o CPF informado
     }
+
+    public void editarCliente() {
+        //em implementação
+    }
 }
