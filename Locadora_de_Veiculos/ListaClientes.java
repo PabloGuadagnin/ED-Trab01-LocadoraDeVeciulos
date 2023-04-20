@@ -80,13 +80,13 @@ public class ListaClientes {
     /*Método encontra o cliente pelo CPF
      * Imprime e retorna um cliente.
      */
-    public Object procuraClientePorCpf(String cpf) {
+    public Object procuraClientePorCpf(long cpf) {
         NohObjetos novoNoh = inicio;
         while (novoNoh != null) {
             Object obj = novoNoh.getObject();
             if (obj instanceof Cliente) {
                 Cliente cliente = (Cliente) obj;
-                if (cliente.getCpf().equals(cpf)) {
+                if (cliente.getCpf()==cpf) {
                     System.out.println(cliente.toString());
                     return cliente;
                 }

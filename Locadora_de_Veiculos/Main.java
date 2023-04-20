@@ -14,13 +14,13 @@ public class Main {
         ListaVeiculos listaVeiculos = new ListaVeiculos();
         ListaClientes listaClientes = new ListaClientes();
 
-        Cliente cliente1 = new Cliente("Zé", 1, 1, "1");
-        Cliente cliente2 = new Cliente("JoZé", 2, 2, "2");
+        Cliente cliente1 = new Cliente("Zé", 1, 1, 1);
+        Cliente cliente2 = new Cliente("JoZé", 2, 2, 2);
 
         listaClientes.insereInicio(cliente1);
         listaClientes.insereFim(cliente2);
 
-        listaClientes.procuraClientePorCpf("2");
+        listaClientes.procuraClientePorCpf(2);
         /*
          * 
          * ListaVeiculos listaVeiculos = new ListaVeiculos();
