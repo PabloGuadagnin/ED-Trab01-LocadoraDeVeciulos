@@ -40,7 +40,7 @@ public class ListaCategorias {
         NohObjetos ant = null, p;
         p = inicio;
 
-        while (p != null && p.getInfo() != ob) {
+        while (p != null && p.getObject() != ob) {
             ant = p;
             p = p.getProximo();
         }
