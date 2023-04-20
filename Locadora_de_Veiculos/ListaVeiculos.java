@@ -8,7 +8,7 @@ public class ListaVeiculos {
         this.inicio = null;
     }
 
-    public void insereInicio(Object ob) {
+    public void insereInicio(Veiculo ob) {
         NohObjetos novo = new NohObjetos(ob);
         if (inicio == null)
             inicio = novo;
@@ -18,7 +18,7 @@ public class ListaVeiculos {
         }
     }
 
-    public void insereFim(Object ob) {
+    public void insereFim(Veiculo ob) {
         NohObjetos novo = new NohObjetos(ob);
         if (inicio == null)
             inicio = novo;
@@ -36,11 +36,11 @@ public class ListaVeiculos {
         return true;
     }
 
-    public boolean remove(Object ob) {
+    public boolean remove(Veiculo ob) {
         NohObjetos ant = null, p;
         p = inicio;
 
-        while (p != null && p.getInfo() != ob) {
+        while (p != null && p.getObj() != ob) {
             ant = p;
             p = p.getProximo();
         }
@@ -66,5 +66,25 @@ public class ListaVeiculos {
             }
         }
         return tamanho;
+    }
+
+    public void imprimeLista() {
+        NohObjetos atual = inicio;
+        while (atual != null) {
+            System.out.println(atual.getObj());
+            atual = atual.getProximo();
+        }
+    }
+
+    public void imprimeListaInversa() {
+        imprimeListaInversaRecursivo(inicio);
+    }
+
+    private void imprimeListaInversaRecursivo(NohObjetos noh) {
+        if (noh == null) {
+            return;
+        }
+        imprimeListaInversaRecursivo(noh.getProximo());
+        System.out.println(noh.getObj());
     }
 }

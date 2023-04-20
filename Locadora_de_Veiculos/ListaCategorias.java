@@ -8,7 +8,7 @@ public class ListaCategorias {
         this.inicio = null;
     }
 
-    public void insereInicio(Object ob) {
+    public void insereInicio(Categoria ob) {
         NohObjetos novo = new NohObjetos(ob);
         if (inicio == null)
             inicio = novo;
@@ -18,8 +18,8 @@ public class ListaCategorias {
         }
     }
 
-    public void insereFim(Object ob) {
-        NohObjetos novo = new NohObjetos(ob);
+    public void insereFim(Categoria categoria) {
+        NohObjetos novo = new NohObjetos(categoria);
         if (inicio == null)
             inicio = novo;
         else {
@@ -36,11 +36,11 @@ public class ListaCategorias {
         return true;
     }
 
-    public boolean remove(Object ob) {
+    public boolean remove(Categoria ob) {
         NohObjetos ant = null, p;
         p = inicio;
 
-        while (p != null && p.getInfo() != ob) {
+        while (p != null && p.getObj() != ob) {
             ant = p;
             p = p.getProximo();
         }
@@ -66,5 +66,35 @@ public class ListaCategorias {
             }
         }
         return tamanho;
+    }
+
+    public ListaCategorias getList() {
+        ListaCategorias lista = new ListaCategorias();
+        NohObjetos atual = inicio;
+        while (atual != null) {
+            lista.insereInicio((Categoria) (atual.getObj()));
+            atual = atual.getProximo();
+        }
+        return lista;
+    }
+
+    public void imprimeLista() {
+        NohObjetos atual = inicio;
+        while (atual != null) {
+            System.out.println(atual.getObj());
+            atual = atual.getProximo();
+        }
+    }
+
+    public void imprimeListaInversa() {
+        imprimeListaInversaRecursivo(inicio);
+    }
+
+    private void imprimeListaInversaRecursivo(NohObjetos noh) {
+        if (noh == null) {
+            return;
+        }
+        imprimeListaInversaRecursivo(noh.getProximo());
+        System.out.println(noh.getObj());
     }
 }
