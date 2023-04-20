@@ -67,4 +67,13 @@ public class ListaCategorias {
         }
         return tamanho;
     }
+
+    public void imprimeLista(){
+        NohObjetos novoNoh = inicio;
+        while (novoNoh !=null){
+            System.out.println(novoNoh.getObject()+" ");
+            novoNoh = novoNoh.getProximo();
+        }
+        System.out.println("");
+    }
 }

@@ -4,9 +4,9 @@ public class Cliente {
     private String nome;
     private long cnh;
     private double telefone;
-    private long cpf;
+    private String cpf;
 
-    public Cliente(String nome, long cnh, double telefone, long cpf) {
+    public Cliente(String nome, long cnh, double telefone, String cpf) {
         this.nome = nome;
         this.cnh = cnh;
         this.telefone = telefone;
@@ -37,11 +37,11 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

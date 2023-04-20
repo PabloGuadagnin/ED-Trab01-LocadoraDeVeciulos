@@ -76,4 +76,21 @@ public class ListaClientes {
         }
         System.out.println("");
     }
+
+    public Object procuraClientePorCpf(String cpf) {
+        NohObjetos novoNoh = inicio;
+        while (novoNoh != null) {
+            Object obj = novoNoh.getObject();
+            if (obj instanceof Cliente) {
+                Cliente cliente = (Cliente) obj;
+                if (cliente.getCpf().equals(cpf)) {
+                    System.out.println(cliente.toString());
+                    return cliente;
+                }
+            }
+            novoNoh = novoNoh.getProximo();
+        }
+        System.out.println("Não encontrado");
+        return null; // Se não encontrou nenhum cliente com o CPF informado
+    }
 }

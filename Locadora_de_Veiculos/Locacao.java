@@ -3,34 +3,35 @@ package Locadora_de_Veiculos;
 import java.time.LocalDate;
 
 public class Locacao {
-    private String cnhCliente;
-    private String placaVeiculo;
+
+    private Cliente cliente;
+    private Veiculo veiculo;
     private LocalDate dataRetirada;
     private LocalDate dataDevolucao;
-    private double valor;
+    private double valorPago;
 
-    public Locacao(String cnhCliente, String placaVeiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valor) {
-        this.cnhCliente = cnhCliente;
-        this.placaVeiculo = placaVeiculo;
+    public Locacao(Cliente cliente, Veiculo veiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valorPago) {
+        this.cliente = cliente;
+        this.veiculo = veiculo;
         this.dataRetirada = dataRetirada;
         this.dataDevolucao = dataDevolucao;
-        this.valor = valor;
+        this.valorPago = valorPago;
     }
 
-    public String getCnhCliente() {
-        return cnhCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setCnhCliente(String cnhCliente) {
-        this.cnhCliente = cnhCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public String getPlacaVeiculo() {
-        return placaVeiculo;
+    public Veiculo getVeiculo() {
+        return veiculo;
     }
 
-    public void setPlacaVeiculo(String placaVeiculo) {
-        this.placaVeiculo = placaVeiculo;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     public LocalDate getDataRetirada() {
@@ -49,11 +50,22 @@ public class Locacao {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public double getValor() {
-        return valor;
+    public double getValorPago() {
+        return valorPago;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setValorPago(double valorPago) {
+        this.valorPago = valorPago;
+    }
+
+    @Override
+    public String toString() {
+        return "Locação [" +
+                "Cliente = " + cliente +
+                ", Veículo = " + veiculo +
+                ", Data de Retirada = " + dataRetirada +
+                ", Data de Devolução = " + dataDevolucao +
+                ", Valor Pago = " + valorPago +
+                ']';
     }
 }
