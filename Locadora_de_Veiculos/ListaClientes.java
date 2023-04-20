@@ -102,7 +102,8 @@ public class ListaClientes {
             if (obj instanceof Cliente) {
                 Cliente cliente = (Cliente) obj;
                 if (cliente.getCpf()==cpf) {
-                    System.out.println(cliente.toString());
+                    
+                    System.out.println("Cliente encontrado: "+cliente.toString());
                     return cliente;
                 }
             }
@@ -112,7 +113,22 @@ public class ListaClientes {
         return null; // Se não encontrou nenhum cliente com o CPF informado
     }
 
-    public void editarCliente() {
-        //em implementação
+    public void editarCliente(String novoNome, long novoCnh, double novoTelefone, long cpf) {
+        NohObjetos novoNoh = inicio;
+        while (novoNoh != null) {
+            Object obj = novoNoh.getObject();
+            if (obj instanceof Cliente) {
+                Cliente cliente = (Cliente) obj;
+                if (cliente.getCpf() == cpf) {
+                    cliente.setNome(novoNome);
+                    cliente.setTelefone(novoTelefone);
+                    cliente.setCnh(novoCnh);
+                    System.out.println("Cliente editado com sucesso!");
+                    return;
+                }
+            }
+            novoNoh = novoNoh.getProximo();
+        }
+        System.out.println("Não foi possível encontrar o cliente com o CPF informado.");
     }
 }

@@ -21,9 +21,9 @@ public class Main {
         listaClientes.insereFim(cliente2);
 
         listaClientes.procuraClientePorCpf(2);
-        listaClientes.excluiCliente(2);
+        System.out.println("");
+        listaClientes.editarCliente("André", 8, 7, 2);
         listaClientes.imprimeLista();
-
         // Constroi a lista de Categorias ------------------------------------------
 
         
