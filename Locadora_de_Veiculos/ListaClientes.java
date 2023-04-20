@@ -55,6 +55,21 @@ public class ListaClientes {
         return true;
     }
 
+    public boolean excluiCliente(long cpf) {
+        NohObjetos novoNoh = inicio;
+        while (novoNoh != null) {
+            Object obj = novoNoh.getObject();
+            if (obj instanceof Cliente) {
+                Cliente cliente = (Cliente) obj;
+                if (cliente.getCpf() == cpf) {
+                    return remove(obj);
+                }
+            }
+            novoNoh = novoNoh.getProximo();
+        }
+        return false; // Se não encontrou nenhum cliente com o CPF informado
+    }
+
     public int tamanho() {
         NohObjetos aux = inicio;
         int tamanho = 0;
