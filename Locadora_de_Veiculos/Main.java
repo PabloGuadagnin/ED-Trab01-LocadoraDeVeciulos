@@ -30,7 +30,6 @@ public class Main {
 
         System.out.println(" -------------------------- ");
 
-        PreencerVeiculos preencerVeiculos = new PreencerVeiculos();
         PreencheCategorias preencheCategorias = new PreencheCategorias();
 
         listaVeiculos.preenche();
