@@ -30,7 +30,6 @@ public class Main {
 
         System.out.println(" -------------------------- ");
 
-        PreencheCategorias preencheCategorias = new PreencheCategorias();
 
         listaVeiculos.preenche();
         listaVeiculos.selecionaPorPlaca("IVV-3E24");
