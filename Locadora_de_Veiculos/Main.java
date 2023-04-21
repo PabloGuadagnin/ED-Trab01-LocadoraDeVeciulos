@@ -33,8 +33,9 @@ public class Main {
         PreencerVeiculos preencerVeiculos = new PreencerVeiculos();
         PreencheCategorias preencheCategorias = new PreencheCategorias();
 
-        //preencheCategorias.preenche();
-        //preencerVeiculos.preenche();
+        listaVeiculos.preenche();
+        listaVeiculos.selecionaPorPlaca("IVV-3E24");
+        
 
     }
 }
