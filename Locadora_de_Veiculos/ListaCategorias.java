@@ -103,4 +103,21 @@ public class ListaCategorias {
             scanCat.close();
             //listaCategorias.imprimeLista();
         }
+
+        public boolean verificaCategoria(int identificador) {
+            NohObjetos aux = inicio;
+        
+            while (aux != null) {
+                Categoria categoria = (Categoria) aux.getObject();
+        
+                if (categoria.getIdentificador()==identificador) {
+                    System.out.println(categoria.toString());
+                    return true;
+                }
+                aux = aux.getProximo();
+            }
+            System.out.println("Categoria não encontrada");
+            return false;
+        }
+        
 }
