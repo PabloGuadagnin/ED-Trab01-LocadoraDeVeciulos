@@ -1,14 +1,17 @@
-package Locadora_de_Veiculos;
+package Locadora_de_Veiculos.SemUso;
 
-public class ListaCategorias {
+import Locadora_de_Veiculos.Listas.NohObjetos;
+import Locadora_de_Veiculos.Objetos.Cliente;
+
+public class ListaClientes {
 
     private NohObjetos inicio;
 
-    public ListaCategorias() {
+    public ListaClientes() {
         this.inicio = null;
     }
 
-    public void insereInicio(Categoria ob) {
+    public void insereInicio(Cliente ob) {
         NohObjetos novo = new NohObjetos(ob);
         if (inicio == null)
             inicio = novo;
@@ -18,8 +21,8 @@ public class ListaCategorias {
         }
     }
 
-    public void insereFim(Categoria categoria) {
-        NohObjetos novo = new NohObjetos(categoria);
+    public void insereFim(Cliente ob) {
+        NohObjetos novo = new NohObjetos(ob);
         if (inicio == null)
             inicio = novo;
         else {
@@ -36,7 +39,7 @@ public class ListaCategorias {
         return true;
     }
 
-    public boolean remove(Categoria ob) {
+    public boolean remove(Cliente ob) {
         NohObjetos ant = null, p;
         p = inicio;
 
@@ -68,16 +71,6 @@ public class ListaCategorias {
         return tamanho;
     }
 
-    public ListaCategorias getList() {
-        ListaCategorias lista = new ListaCategorias();
-        NohObjetos atual = inicio;
-        while (atual != null) {
-            lista.insereInicio((Categoria) (atual.getObj()));
-            atual = atual.getProximo();
-        }
-        return lista;
-    }
-
     public void imprimeLista() {
         NohObjetos atual = inicio;
         while (atual != null) {
@@ -96,5 +89,23 @@ public class ListaCategorias {
         }
         imprimeListaInversaRecursivo(noh.getProximo());
         System.out.println(noh.getObj());
+    }
+
+    /*Procura cliente pelo cpf */
+    public Object procuraClientePorCpf(long cpf) {
+        NohObjetos novoNoh = inicio;
+        while (novoNoh != null) {
+            Object obj = novoNoh.getObj();
+            if (obj instanceof Cliente) {
+                Cliente cliente = (Cliente) obj;
+                if (cliente.getCpf()==cpf) {
+                    System.out.println(cliente.toString());
+                    return cliente;
+                }
+            }
+            novoNoh = novoNoh.getProximo();
+        }
+        System.out.println("Não encontrado");
+        return null; // Se não encontrou nenhum cliente com o CPF informado
     }
 }

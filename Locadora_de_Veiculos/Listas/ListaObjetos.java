@@ -1,24 +1,30 @@
-package Locadora_de_Veiculos;
+package Locadora_de_Veiculos.Listas;
 
-public class ListaVeiculos {
+import Locadora_de_Veiculos.Interfaces.IListaObjetos;
+
+public class ListaObjetos implements IListaObjetos {
 
     private NohObjetos inicio;
+    private NohObjetos fim;
 
-    public ListaVeiculos() {
+    public ListaObjetos() {
         this.inicio = null;
+        //this.fim = null;
     }
 
-    public void insereInicio(Veiculo ob) {
+    public void insereInicio(Object ob) {
         NohObjetos novo = new NohObjetos(ob);
-        if (inicio == null)
+        if (inicio == null) {
             inicio = novo;
-        else {
+            fim = novo;
+        } else {
             novo.setProximo(inicio);
+            inicio.setAnterior(novo);
             inicio = novo;
         }
     }
 
-    public void insereFim(Veiculo ob) {
+    public void insereFim(Object ob) {
         NohObjetos novo = new NohObjetos(ob);
         if (inicio == null)
             inicio = novo;
@@ -36,22 +42,28 @@ public class ListaVeiculos {
         return true;
     }
 
-    public boolean remove(Veiculo ob) {
-        NohObjetos ant = null, p;
-        p = inicio;
+    public boolean remove(Object ob) {
+        NohObjetos p = inicio;
 
-        while (p != null && p.getObj() != ob) {
-            ant = p;
+        while (p!=null && p.getObj() != ob){
             p = p.getProximo();
         }
 
         if (p == null)
             return false;
-        if (ant == null)
+        if (p == inicio){
             inicio = p.getProximo();
-        else
-            ant.setProximo(p.getProximo());
+            if(inicio != null) inicio.setAnterior(null);
+            else fim = null;
+        } else if (p.getProximo() == null){     
+                p.getAnterior().setProximo(null);
+                fim = p.getAnterior();
 
+        } else {
+            p.getAnterior().setProximo(p.getProximo());
+            p.getProximo().setAnterior(p.getAnterior());
+        }
+        
         return true;
     }
 
@@ -74,17 +86,5 @@ public class ListaVeiculos {
             System.out.println(atual.getObj());
             atual = atual.getProximo();
         }
-    }
-
-    public void imprimeListaInversa() {
-        imprimeListaInversaRecursivo(inicio);
-    }
-
-    private void imprimeListaInversaRecursivo(NohObjetos noh) {
-        if (noh == null) {
-            return;
-        }
-        imprimeListaInversaRecursivo(noh.getProximo());
-        System.out.println(noh.getObj());
     }
 }

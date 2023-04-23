@@ -1,14 +1,17 @@
-package Locadora_de_Veiculos;
+package Locadora_de_Veiculos.SemUso;
 
-public class ListaClientes {
+import Locadora_de_Veiculos.Listas.NohObjetos;
+import Locadora_de_Veiculos.Objetos.Veiculo;
+
+public class ListaVeiculos {
 
     private NohObjetos inicio;
 
-    public ListaClientes() {
+    public ListaVeiculos() {
         this.inicio = null;
     }
 
-    public void insereInicio(Cliente ob) {
+    public void insereInicio(Veiculo ob) {
         NohObjetos novo = new NohObjetos(ob);
         if (inicio == null)
             inicio = novo;
@@ -18,7 +21,7 @@ public class ListaClientes {
         }
     }
 
-    public void insereFim(Cliente ob) {
+    public void insereFim(Veiculo ob) {
         NohObjetos novo = new NohObjetos(ob);
         if (inicio == null)
             inicio = novo;
@@ -36,7 +39,7 @@ public class ListaClientes {
         return true;
     }
 
-    public boolean remove(Cliente ob) {
+    public boolean remove(Veiculo ob) {
         NohObjetos ant = null, p;
         p = inicio;
 
@@ -86,23 +89,5 @@ public class ListaClientes {
         }
         imprimeListaInversaRecursivo(noh.getProximo());
         System.out.println(noh.getObj());
-    }
-
-    /*Procura cliente pelo cpf */
-    public Object procuraClientePorCpf(long cpf) {
-        NohObjetos novoNoh = inicio;
-        while (novoNoh != null) {
-            Object obj = novoNoh.getObject();
-            if (obj instanceof Cliente) {
-                Cliente cliente = (Cliente) obj;
-                if (cliente.getCpf()==cpf) {
-                    System.out.println(cliente.toString());
-                    return cliente;
-                }
-            }
-            novoNoh = novoNoh.getProximo();
-        }
-        System.out.println("Não encontrado");
-        return null; // Se não encontrou nenhum cliente com o CPF informado
     }
 }

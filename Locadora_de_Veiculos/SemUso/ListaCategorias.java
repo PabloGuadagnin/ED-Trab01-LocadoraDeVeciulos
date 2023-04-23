@@ -1,14 +1,17 @@
-package Locadora_de_Veiculos;
+package Locadora_de_Veiculos.SemUso;
 
-public class ListaObjetos {
+import Locadora_de_Veiculos.Listas.NohObjetos;
+import Locadora_de_Veiculos.Objetos.Categoria;
+
+public class ListaCategorias {
 
     private NohObjetos inicio;
 
-    public ListaObjetos() {
+    public ListaCategorias() {
         this.inicio = null;
     }
 
-    public void insereInicio(Object ob) {
+    public void insereInicio(Categoria ob) {
         NohObjetos novo = new NohObjetos(ob);
         if (inicio == null)
             inicio = novo;
@@ -18,8 +21,8 @@ public class ListaObjetos {
         }
     }
 
-    public void insereFim(Object ob) {
-        NohObjetos novo = new NohObjetos(ob);
+    public void insereFim(Categoria categoria) {
+        NohObjetos novo = new NohObjetos(categoria);
         if (inicio == null)
             inicio = novo;
         else {
@@ -36,7 +39,7 @@ public class ListaObjetos {
         return true;
     }
 
-    public boolean remove(Object ob) {
+    public boolean remove(Categoria ob) {
         NohObjetos ant = null, p;
         p = inicio;
 
@@ -66,5 +69,35 @@ public class ListaObjetos {
             }
         }
         return tamanho;
+    }
+
+    public ListaCategorias getList() {
+        ListaCategorias lista = new ListaCategorias();
+        NohObjetos atual = inicio;
+        while (atual != null) {
+            lista.insereInicio((Categoria) (atual.getObj()));
+            atual = atual.getProximo();
+        }
+        return lista;
+    }
+
+    public void imprimeLista() {
+        NohObjetos atual = inicio;
+        while (atual != null) {
+            System.out.println(atual.getObj());
+            atual = atual.getProximo();
+        }
+    }
+
+    public void imprimeListaInversa() {
+        imprimeListaInversaRecursivo(inicio);
+    }
+
+    private void imprimeListaInversaRecursivo(NohObjetos noh) {
+        if (noh == null) {
+            return;
+        }
+        imprimeListaInversaRecursivo(noh.getProximo());
+        System.out.println(noh.getObj());
     }
 }
