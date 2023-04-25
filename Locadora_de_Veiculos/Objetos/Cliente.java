@@ -3,11 +3,11 @@ package Locadora_de_Veiculos.Objetos;
 public class Cliente {
     private String nome;
     private long cnh;
-    private double telefone;
+    private long telefone;
     private long cpf;
     private boolean locacao;
 
-    public Cliente(String nome, long cnh, double telefone, long cpf) {
+    public Cliente(String nome, long cnh, long telefone, long cpf) {
         this.nome = nome;
         this.cnh = cnh;
         this.telefone = telefone;
@@ -21,17 +21,19 @@ public class Cliente {
     public long getCnh() {return cnh;}
     public void setCnh(long cnh) {this.cnh = cnh;}
 
-    public double getTelefone() {return telefone;}
-    public void setTelefone(double telefone) {this.telefone = telefone;}
+    public long getTelefone() {return telefone;}
+    public void setTelefone(long telefone) {this.telefone = telefone;}
 
     public long getCpf() {return cpf;}
     public void setCpf(long cpf) {this.cpf = cpf;}
     
     public boolean getLocacao(){return locacao;}
     public void setLocacao(Boolean locacao){this.locacao = locacao;}
-    
+
     @Override
     public String toString() {
-        return "Veiculo [nome=" + nome + ", cnh=" + cnh + ", telefone=" + telefone + ", cpf=" + cpf + "]";
+        return "Cliente [nome=" + nome + ", cnh=" + cnh + ", telefone=" + telefone + ", cpf=" + cpf + ", locacao="
+                + locacao + "]";
     }
+
 }
