@@ -24,6 +24,7 @@ public class Main {
         ListaVeiculos listaVeiculos = new ListaVeiculos();
         ListaClientes listaClientes = new ListaClientes();
         ListaCategorias listaCategorias = new ListaCategorias();
+        ListaLocacaoes listaLocacaoes = new ListaLocacaoes();
 
         Cliente cliente1 = new Cliente("Zé", 1, 1, 1);
         Cliente cliente2 = new Cliente("JoZé", 2, 2, 2);
@@ -154,10 +155,9 @@ public class Main {
                     // Calcula a diferença em dias entre as datas
                     long diferencaEmMillis = calendarFim.getTimeInMillis() - calendarInicio.getTimeInMillis();
                     long dias = diferencaEmMillis / (24 * 60 * 60 * 1000);
-                    System.out.println("A diferença entre as datas é de " + dias + " dias.");
 
                     Locacao novLocacao = new Locacao(clienteA, veiculoA, dataInicio, dataFim, dias*50);
-
+                    listaLocacaoes.insereFim(novLocacao);
                     scan.nextLine();
                     System.out.println( novLocacao.toString());
                     scan.nextLine();

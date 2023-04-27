@@ -77,18 +77,7 @@ public class ListaLocacaoes {
         System.out.println("");
     }
 
-    public void cadastraLocacao(Locacao locacao) {
-        NohObjetos novo = new NohObjetos(locacao);
-        if (inicio == null) {
-            inicio = novo;
-        } else {
-            NohObjetos ultimo = null;
-            for (NohObjetos i = inicio; i != null; i = i.getProximo()) {
-                ultimo = i;
-            }
-            ultimo.setProximo(novo);
-        }
-    }
+    
 }
 
 

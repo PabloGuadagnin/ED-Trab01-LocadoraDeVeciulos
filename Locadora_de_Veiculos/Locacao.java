@@ -62,11 +62,11 @@ public class Locacao {
     @Override
     public String toString() {
         return "Locação [" +
-                "Cliente = " + cliente +
-                ", Veículo = " + veiculo +
-                ", Data de Retirada = " + dataRetirada +
-                ", Data de Devolução = " + dataDevolucao +
-                ", Valor Pago = " + valorPago +
+                "\n Cliente = " + cliente +
+                ",\n Veículo = " + veiculo +
+                ",\n Data de Retirada = " + dataRetirada +
+                ",\n Data de Devolução = " + dataDevolucao +
+                ",\n Valor Pago = " + valorPago +
                 ']';
     }
 }
