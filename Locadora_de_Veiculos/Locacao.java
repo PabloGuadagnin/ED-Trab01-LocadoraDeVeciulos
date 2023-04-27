@@ -1,20 +1,21 @@
 package Locadora_de_Veiculos;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Locacao {
 
     private Cliente cliente;
     private Veiculo veiculo;
-    private LocalDate dataRetirada;
-    private LocalDate dataDevolucao;
+    private Date dataRetirada;
+    private Date dataDevolucao;
     private double valorPago;
 
-    public Locacao(Cliente cliente, Veiculo veiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valorPago) {
+    public Locacao(Cliente cliente, Veiculo veiculo, Date dataInicio, Date dataFim, double valorPago) {
         this.cliente = cliente;
         this.veiculo = veiculo;
-        this.dataRetirada = dataRetirada;
-        this.dataDevolucao = dataDevolucao;
+        this.dataRetirada = dataInicio;
+        this.dataDevolucao = dataFim;
         this.valorPago = valorPago;
     }
 
@@ -34,19 +35,19 @@ public class Locacao {
         this.veiculo = veiculo;
     }
 
-    public LocalDate getDataRetirada() {
+    public Date getDataRetirada() {
         return dataRetirada;
     }
 
-    public void setDataRetirada(LocalDate dataRetirada) {
+    public void setDataRetirada(Date dataRetirada) {
         this.dataRetirada = dataRetirada;
     }
 
-    public LocalDate getDataDevolucao() {
+    public Date getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(LocalDate dataDevolucao) {
+    public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 

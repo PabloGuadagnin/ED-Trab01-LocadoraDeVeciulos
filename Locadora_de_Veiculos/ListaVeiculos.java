@@ -88,7 +88,7 @@ public class ListaVeiculos {
             if (aux.getObject() instanceof Veiculo) {
                 Veiculo veiculo = (Veiculo) aux.getObject();
                 if (veiculo.getPlaca().equals(placa)) {
-                    System.out.println(veiculo.toString());
+                    //System.out.println(veiculo.toString());
                     return veiculo;
                 }
             }
