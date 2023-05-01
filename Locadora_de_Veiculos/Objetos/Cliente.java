@@ -35,7 +35,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente [nome=" + nome + ", cnh=" + cnh + ", telefone=" + telefone + ", cpf=" + cpf + ", locacao="
+        return "[Nome: " + nome + ", cnh: " + cnh + ", telefone: " + telefone + ", cpf: " + cpf + ", locacao:"
                 + locacao + "]";
     }
 

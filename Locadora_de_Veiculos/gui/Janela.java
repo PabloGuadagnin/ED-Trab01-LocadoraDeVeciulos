@@ -16,6 +16,7 @@ import Locadora_de_Veiculos.Arquivo.Arquivo;
 import Locadora_de_Veiculos.Cadastro.CadClientes;
 import Locadora_de_Veiculos.Cadastro.CadVeiculos;
 import Locadora_de_Veiculos.Listas.ListaObjetos;
+import Locadora_de_Veiculos.Objetos.Cliente;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -371,6 +372,15 @@ public class Janela extends JFrame{
         item.addActionListener(new ActionListener() {
             public void actionPerformed (ActionEvent ev){
                 if (ev.getSource() == btnClientesCancelar){
+                    encerrarPaineis();
+                }
+                if (ev.getSource() == btnClientesLimpar){
+                    limparCampos();
+                }
+                if (ev.getSource() == btnClientesSalvar){
+                    Cliente cliente = new Cliente(txtNome.getText(), Long.parseLong(txtCnh.getText()),
+                        Long.parseLong(txtTelefone.getText()),Long.parseLong(txtCpf.getText()));
+                    clientes.insereFim(cliente);
                     encerrarPaineis();
                 }
             }
