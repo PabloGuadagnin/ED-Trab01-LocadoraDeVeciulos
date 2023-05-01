@@ -58,10 +58,12 @@ public class Janela extends JFrame{
     private JMenuItem sair; 
 
     private JLabel labelListar;
+    private JLabel lblExcluir;
 
     private JLayeredPane layeredPane;
     private JPanel painelListar;
     private JPanel painelCadastrarCliente;
+    private JPanel painelExcluir;
 
     private JTextArea areaDeTexto;
 
@@ -69,11 +71,14 @@ public class Janela extends JFrame{
     private JButton btnClientesCancelar;
     private JButton btnClientesLimpar;
     private JButton btnClientesSalvar;
+    private JButton btnExcluir;
+    private JButton btnCancelarExclusao;
 
     private JTextField txtNome;
 	private JTextField txtCnh;
 	private JTextField txtTelefone;
 	private JTextField txtCpf;
+    private JTextField txtExcluir;
 
 	public Janela() {
         carregarListas();
@@ -190,6 +195,7 @@ public class Janela extends JFrame{
 		layeredPane.setBounds(10, 11, 760, 560);
 		layeredPane.add(painelListar());
         layeredPane.add(painelCadastrarCliente());
+        layeredPane.add(painelExcluir());
         
         return layeredPane;
     }
@@ -294,6 +300,36 @@ public class Janela extends JFrame{
         return painelCadastrarCliente;
     }
 
+    private JPanel painelExcluir(){
+        painelExcluir = new JPanel();
+        painelExcluir.setBounds(10, 11, 745, 545);
+        painelExcluir.setLayout(null);
+
+        lblExcluir = new JLabel("");
+        lblExcluir.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblExcluir.setBounds(150, 245, 130, 20);
+		painelExcluir.add(lblExcluir);
+        
+        txtExcluir = new JTextField();
+		txtExcluir.setBounds(285, 249, 217, 20);
+		painelExcluir.add(txtExcluir);
+		txtExcluir.setColumns(10);
+
+		btnExcluir = new JButton("Excluir");
+		btnExcluir.setBounds(280, 345, 90, 25);
+		painelExcluir.add(btnExcluir);
+		
+		btnCancelarExclusao = new JButton("Cancelar");
+		btnCancelarExclusao.setBounds(415, 345, 90, 25);
+		painelExcluir.add(btnCancelarExclusao);
+
+        evBotoes(btnExcluir);
+        evBotoes(btnCancelarExclusao);
+        painelExcluir.setVisible(false);
+
+        return painelExcluir;
+    }
+
     private void eventos(JMenuItem item){
         item.addActionListener(new ActionListener() {
             public void actionPerformed (ActionEvent ev){
@@ -316,6 +352,12 @@ public class Janela extends JFrame{
                     encerrarPaineis();
                     painelCadastrarCliente.setVisible(true);
                 }
+                if (ev.getSource() == excluirClientes){
+                    encerrarPaineis();
+                    lblExcluir.setText("Excluir Cliente");
+                    painelExcluir.setVisible(true);
+                }
+
 
 
 
@@ -383,6 +425,18 @@ public class Janela extends JFrame{
                     clientes.insereFim(cliente);
                     encerrarPaineis();
                 }
+                if (ev.getSource() == btnCancelarExclusao){
+                    encerrarPaineis();
+                }
+                if (ev.getSource() == btnExcluir){
+                    if(!clientes.estahVazia()){
+                        Object cliente = new Object();
+                        Long cpf = Long.parseLong(txtExcluir.getText());
+                        cliente = clientes.procuraClientePorCpf(cpf);
+                        clientes.remove(cliente);
+                        encerrarPaineis();
+                    }
+                }
             }
         });
     }
@@ -392,6 +446,7 @@ public class Janela extends JFrame{
         areaDeTexto.setText("");
         painelListar.setVisible(false);
         painelCadastrarCliente.setVisible(false);
+        painelExcluir.setVisible(false);
     }
 
     private void limparCampos(){
@@ -399,5 +454,6 @@ public class Janela extends JFrame{
         txtCnh.setText("");
         txtTelefone.setText("");
         txtCpf.setText("");
+        txtExcluir.setText("");
     }
 }
