@@ -1,5 +1,7 @@
 package Locadora_de_Veiculos.Objetos;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 public class Veiculo {
     private String placa;
     private String modelo;
@@ -8,6 +10,7 @@ public class Veiculo {
     private int potencia;
     private int nLugares;
     private String categoria;
+    private boolean locacao;
 
     public Veiculo(String placa, String modelo, String marca, int ano, int potencia, int nLugares, String categoria) {
         this.placa = placa;
@@ -17,6 +20,7 @@ public class Veiculo {
         this.potencia = potencia;
         this.nLugares = nLugares;
         this.categoria = categoria;
+        this.locacao = false;
     }
 
     public String getPlaca() {return placa;}
@@ -39,6 +43,9 @@ public class Veiculo {
 
     public String getCategoria() {return categoria;}
     public void setCategoria(String categoria) {this.categoria = categoria;}
+
+    public Boolean getBoolean() {return locacao;}
+    public void setLocacao(boolean locacao){this.locacao = locacao;}
 
     @Override
     public String toString() {

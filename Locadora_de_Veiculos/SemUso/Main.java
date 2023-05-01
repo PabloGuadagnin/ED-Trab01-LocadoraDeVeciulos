@@ -62,11 +62,6 @@ public class Main {
         scanVeic.close();
         // ---------------------------------------------------------------------------
 
-        listaCategorias.imprimeLista();
-
-        System.out.println(" -------------------------- ");
-
-        listaVeiculos.imprimeLista();
 
     }
 }

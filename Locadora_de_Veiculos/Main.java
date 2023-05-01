@@ -9,6 +9,7 @@ package Locadora_de_Veiculos;
 import java.util.Scanner;
 
 import Locadora_de_Veiculos.Arquivo.Arquivo;
+import Locadora_de_Veiculos.Cadastro.CadClientes;
 import Locadora_de_Veiculos.Listas.ListaObjetos;
 import Locadora_de_Veiculos.Objetos.Cliente;
 
@@ -20,15 +21,14 @@ public class Main {
 
         ListaObjetos categorias = new ListaObjetos();
         ListaObjetos veiculos = new ListaObjetos();
-        ListaObjetos clientes = new ListaObjetos();
+        CadClientes clientes = new CadClientes();
 
         Arquivo arquivo = new Arquivo();
         arquivo.getVeiculos(veiculos);
         arquivo.getCategorias(categorias);
         arquivo.getClientes(clientes);
 
-        // veiculos.imprimeLista();
-        // categorias.imprimeLista();
+        
         do {
             System.out.println("O que quer fazer ?");
             System.out.println("1 - Imprimir lista de clientes");
@@ -42,7 +42,10 @@ public class Main {
 
             switch (escolha) {
                 case 1:
-                    clientes.imprimeLista();
+                    clientes.imprimeListaInicio();
+                    System.out.println("");
+                    clientes.imprimeListaFinal();
+
                     break;
                 case 2:
                     Cliente cliente = new Cliente(null, 0, 0, 0); // Cria o obj

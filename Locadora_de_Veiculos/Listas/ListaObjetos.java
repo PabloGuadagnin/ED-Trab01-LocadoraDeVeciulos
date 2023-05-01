@@ -5,13 +5,16 @@ import Locadora_de_Veiculos.Objetos.Cliente;
 
 public class ListaObjetos implements IListaObjetos {
 
-    private NohObjetos inicio;
-    private NohObjetos fim;
+    protected NohObjetos inicio;
+    protected NohObjetos fim;
 
     public ListaObjetos() {
         this.inicio = null;
-        // this.fim = null;
+        this.fim = null;
     }
+
+    public NohObjetos getFim(){ return fim;}
+    public NohObjetos getinicio(){ return inicio;}
 
     public void insereInicio(Object ob) {
         NohObjetos novo = new NohObjetos(ob);
@@ -27,13 +30,14 @@ public class ListaObjetos implements IListaObjetos {
 
     public void insereFim(Object ob) {
         NohObjetos novo = new NohObjetos(ob);
-        if (inicio == null)
+        if (fim == null){
             inicio = novo;
-        else {
-            NohObjetos ultimo = null;
-            for (NohObjetos i = inicio; i != null; i = i.getProximo())
-                ultimo = i;
-            ultimo.setProximo(novo);
+            fim = novo;
+        } else {
+
+            novo.setAnterior(fim);
+            fim.setProximo(novo);
+            fim = novo;
         }
     }
 
@@ -83,32 +87,23 @@ public class ListaObjetos implements IListaObjetos {
         return tamanho;
     }
 
-    public void imprimeLista() {
+    public String imprimeListaInicio() {
         NohObjetos atual = inicio;
+        String dados = "";
         while (atual != null) {
-            System.out.println(atual.getObj());
+            dados += atual.getObj() + "\n";
             atual = atual.getProximo();
         }
+        return dados;
     }
 
-    /*
-     * Método encontra o cliente pelo CPF
-     * Imprime e retorna um cliente.
-     */
-    public Object procuraClientePorCpf(long cpf) {
-        NohObjetos novoNoh = inicio;
-        while (novoNoh != null) {
-            Object obj = novoNoh.getObj();
-            if (obj instanceof Cliente) {
-                Cliente cliente = (Cliente) obj;
-                if (cliente.getCpf() == cpf) {
-                    // System.out.println("Cliente encontrado: " + cliente.toString());
-                    return cliente;
-                }
-            }
-            novoNoh = novoNoh.getProximo();
+    public String imprimeListaFinal() {
+        NohObjetos atual = fim;
+        String dados = "";
+        while (atual != null) {
+            dados += atual.getObj() + "\n";
+            atual = atual.getAnterior();
         }
-        System.out.println("Não encontrado");
-        return null; // Se não encontrou nenhum cliente com o CPF informado
+        return dados;
     }
 }
