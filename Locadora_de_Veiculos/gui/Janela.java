@@ -16,6 +16,7 @@ import Locadora_de_Veiculos.Cadastro.CadClientes;
 import Locadora_de_Veiculos.Cadastro.CadVeiculos;
 import Locadora_de_Veiculos.Listas.ListaObjetos;
 import Locadora_de_Veiculos.Objetos.Cliente;
+import Locadora_de_Veiculos.Objetos.Locacao;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,7 @@ public class Janela extends JFrame {
     private CadClientes clientes;
     private CadVeiculos veiculos;
     private ListaObjetos categorias;
+    private ListaObjetos locacao; ///////////////////////////////
     private Arquivo arquivo;
 
     private JMenuBar menuBar;
@@ -385,6 +387,16 @@ public class Janela extends JFrame {
                     labelListar.setText("Categorias Cadastradas");
                     areaDeTexto.append(categorias.imprimeListaFinal());
                     painelListar.setVisible(true);
+                }
+
+                //Menu locações
+
+                if(ev.getSource() == listarLocacoes){
+                    encerrarPaineis();
+                    labelListar.setText("Teste");
+                    areaDeTexto.append(locacao.imprimeListaInicio());
+                    painelListar.setVisible(true);
+
                 }
 
                 // Menu Sair
