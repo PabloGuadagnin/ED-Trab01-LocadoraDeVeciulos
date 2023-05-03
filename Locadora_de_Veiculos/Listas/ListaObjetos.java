@@ -1,7 +1,6 @@
 package Locadora_de_Veiculos.Listas;
 
 import Locadora_de_Veiculos.Interfaces.IListaObjetos;
-import Locadora_de_Veiculos.Objetos.Cliente;
 
 public class ListaObjetos implements IListaObjetos {
 

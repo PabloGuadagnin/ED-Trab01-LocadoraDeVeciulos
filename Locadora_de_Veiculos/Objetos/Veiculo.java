@@ -1,7 +1,5 @@
 package Locadora_de_Veiculos.Objetos;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 public class Veiculo {
     private String placa;
     private String modelo;
