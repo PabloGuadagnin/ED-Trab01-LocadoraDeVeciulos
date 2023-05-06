@@ -27,7 +27,7 @@ public class Janela extends JFrame {
     private CadClientes clientes;
     private CadVeiculos veiculos;
     private ListaObjetos categorias;
-    private ListaObjetos locacao; ///////////////////////////////
+    private ListaObjetos locacao; 
     private Arquivo arquivo;
 
     private JMenuBar menuBar;

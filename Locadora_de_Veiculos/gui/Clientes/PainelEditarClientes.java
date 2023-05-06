@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 import Locadora_de_Veiculos.gui.Janela;
 
-public class PainelEditarClientes extends Janela {
+public class PainelEditarClientes extends JPanel {
 
     private JPanel painelEditarCliente;
 
@@ -22,11 +22,8 @@ public class PainelEditarClientes extends Janela {
     private JButton btnEditarClientesSalvar;
 
 
-    public JPanel getPainel(){
-        return criarPainel();
-    }
 
-    private JPanel criarPainel(){
+    public JPanel criarPainel222(){
 
         painelEditarCliente = new JPanel();
         painelEditarCliente.setBounds(10, 11, 745, 545);
@@ -86,13 +83,17 @@ public class PainelEditarClientes extends Janela {
         btnEditarClientesSalvar.setBounds(250, 407, 130, 23);
         painelEditarCliente.add(btnEditarClientesSalvar);
 
-        evBotoes(btnEditarClientesCancelar);
-        evBotoes(btnEditarClientesSalvar);
+        //evBotoes(btnEditarClientesCancelar);
+        //evBotoes(btnEditarClientesSalvar);
 
         painelEditarCliente.setVisible(false);
-
         return painelEditarCliente;
+    
     }
     
+    public JButton getBtnEditarCLienteSalvar(){
+        return btnEditarClientesSalvar;
+    }
+
     
 }
