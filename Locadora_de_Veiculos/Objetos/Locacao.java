@@ -30,5 +30,11 @@ public class Locacao {
 
     public double getValor() {return valor;}
     public void setValor(double valor) {this.valor = valor;}
+
+    public String toString() {
+        return "Locacao [cnhLocador=" + cnhLocador + ", placaVeiculo=" + placaVeiculo + ", dataInicio=" + dataInicio
+                + ", dataFim=" + dataFim + ", valor=" + valor + "]";
+    }
+    
     
 }

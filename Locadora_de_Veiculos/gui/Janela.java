@@ -16,7 +16,8 @@ import Locadora_de_Veiculos.Cadastro.CadClientes;
 import Locadora_de_Veiculos.Cadastro.CadVeiculos;
 import Locadora_de_Veiculos.Listas.ListaObjetos;
 import Locadora_de_Veiculos.Objetos.Cliente;
-import Locadora_de_Veiculos.gui.Clientes.PainelEditarClientes;
+import Locadora_de_Veiculos.Objetos.Locacao;
+import Locadora_de_Veiculos.Objetos.Veiculo;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -27,7 +28,7 @@ public class Janela extends JFrame {
     private CadClientes clientes;
     private CadVeiculos veiculos;
     private ListaObjetos categorias;
-    private ListaObjetos locacao; 
+    private ListaObjetos locacoes; 
     private Arquivo arquivo;
 
     private JMenuBar menuBar;
@@ -42,8 +43,7 @@ public class Janela extends JFrame {
     private JMenuItem listarVeiculosDoInicio;
     private JMenuItem listarVeiculosDoFim;
     private JMenuItem incluirVeiculos;
-    private JMenuItem excluirVeiculos;
-    private JMenuItem alterarVeiculo;
+    private JMenuItem editarVeiculos;
 
     private JMenu menuCategorias;
     private JMenuItem listarCategoriasInicio;
@@ -59,12 +59,15 @@ public class Janela extends JFrame {
 
     private JLabel labelListar;
     private JLabel lblInformeCpf;
+    private JLabel lblInformePlaca;
 
     private JLayeredPane layeredPane;
     private JPanel painelListar;
     private JPanel painelCadastrarCliente;
     private JPanel painelEditar;
     private JPanel painelEditarCliente;
+    private JPanel painelEditarVeiculo;
+    private JPanel painelIncluirLocacao;
 
     private JTextArea areaDeTexto;
 
@@ -75,21 +78,30 @@ public class Janela extends JFrame {
     private JButton btnExcluir;
     private JButton btnCancelarExclusao;
     private JButton btnEditar;
-
+    private JButton btnEditarVeiculo;
+    private JButton btnExcluirVeiculo;
     private JButton btnEditarClientesCancelar;
     private JButton btnEditarClientesSalvar;
+    private JButton btnCancelarExclusaoVeiculo;
+    private JButton btnLocacaoCancelar;
+    private JButton btnLocacaoLimpar;
+    private JButton btnLocacaoSalvar;
 
     private JTextField txtNome;
     private JTextField txtCnh;
     private JTextField txtTelefone;
     private JTextField txtCpf;
     private JTextField txtEditar;
-
+    private JTextField txtEditarVeiculo;
     private JTextField txtEditarNome;
     private JTextField txtEditarCnh;
     private JTextField txtEditarTelefone;
     private JTextField txtEditarCpf;
-
+    private JTextField txtCnhLocacao;
+    private JTextField txtPlacaLocacao;
+    private JTextField txtDataInicio;
+    private JTextField txtDataFim;
+    private JTextField txtValor;
 
     private String cpfAux;
 
@@ -98,9 +110,9 @@ public class Janela extends JFrame {
         inicializar();
     }
 
-
     private void carregarListas() {
         categorias = new ListaObjetos();
+        locacoes = new ListaObjetos();
         veiculos = new CadVeiculos();
         clientes = new CadClientes();
         arquivo = new Arquivo();
@@ -120,11 +132,10 @@ public class Janela extends JFrame {
         getContentPane().add(criarLayeredPane());
     }
 
-
     private JMenuBar criarBarraMenu() {
 
         menuBar = new JMenuBar();
-        menuBar.add(criarMenuCLientes());
+        menuBar.add(criarMenuClientes());
         menuBar.add(criarMenuVeiculos());
         menuBar.add(criarMenuCategorias());
         menuBar.add(criarMenuLocacoes());
@@ -133,7 +144,7 @@ public class Janela extends JFrame {
         return menuBar;
     }
 
-    private JMenu criarMenuCLientes() {
+    private JMenu criarMenuClientes() {
         menuClientes = new JMenu("Clientes");
         listarClientesDoInicio = new JMenuItem("Listar do Inicio");
         listarClientesDoFim = new JMenuItem("Listar do Fim");
@@ -156,15 +167,14 @@ public class Janela extends JFrame {
         listarVeiculosDoInicio = new JMenuItem("Listar do Inicio");
         listarVeiculosDoFim = new JMenuItem("Listar do Fim");
         incluirVeiculos = new JMenuItem("Incluir");
-        excluirVeiculos = new JMenuItem("Excluir");
-        alterarVeiculo = new JMenuItem("Alterar");
+        editarVeiculos = new JMenuItem("Editar");
         menuVeiculos.add(listarVeiculosDoInicio);
         menuVeiculos.add(listarVeiculosDoFim);
         menuVeiculos.add(incluirVeiculos);
-        menuVeiculos.add(excluirVeiculos);
-        menuVeiculos.add(alterarVeiculo);
+        menuVeiculos.add(editarVeiculos);
         eventos(listarVeiculosDoInicio);
         eventos(listarVeiculosDoFim);
+        eventos(editarVeiculos);
 
         return menuVeiculos;
     }
@@ -189,6 +199,9 @@ public class Janela extends JFrame {
         menuLocacoes.add(listarLocacoes);
         menuLocacoes.add(incluirLocacoes);
         menuLocacoes.add(excluirLocacoes);
+        eventos(listarLocacoes);
+        eventos(incluirLocacoes);
+        eventos(excluirLocacoes);
 
         return menuLocacoes;
     }
@@ -209,6 +222,8 @@ public class Janela extends JFrame {
         layeredPane.add(painelCadastrarCliente());
         layeredPane.add(painelEditar());
         layeredPane.add(painelEditarCliente());
+        layeredPane.add(painelEditarVeiculo());
+        layeredPane.add(painelIncluirLocacao());
 
         return layeredPane;
     }
@@ -320,18 +335,17 @@ public class Janela extends JFrame {
 
         lblInformeCpf = new JLabel(" Informe o CPF:");
         lblInformeCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblInformeCpf.setBounds(120, 245, 150, 20);
+        lblInformeCpf.setBounds(110, 245, 150, 20);
         painelEditar.add(lblInformeCpf);
 
         txtEditar = new JTextField();
-        txtEditar.setBounds(285, 249, 217, 20);
+        txtEditar.setBounds(286, 249, 217, 20);
         painelEditar.add(txtEditar);
-        txtEditar.setColumns(10);
+        txtEditar.setColumns(20);
 
         btnEditar = new JButton("Editar");
         btnEditar.setBounds(240, 345, 90, 25);
         painelEditar.add(btnEditar);
-
 
         btnExcluir = new JButton("Excluir");
         btnExcluir.setBounds(340, 345, 90, 25);
@@ -349,7 +363,6 @@ public class Janela extends JFrame {
         return painelEditar;
     }
 
-    
     private JPanel painelEditarCliente(){
         painelEditarCliente = new JPanel();
         painelEditarCliente.setBounds(10, 11, 745, 545);
@@ -417,6 +430,117 @@ public class Janela extends JFrame {
         return painelEditarCliente;
     }
     
+    private JPanel painelEditarVeiculo() {
+        painelEditarVeiculo = new JPanel();
+        painelEditarVeiculo.setBounds(10, 11, 745, 545);
+        painelEditarVeiculo.setLayout(null);
+
+        lblInformePlaca = new JLabel(" Informe a Placa:");
+        lblInformePlaca.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        lblInformePlaca.setBounds(110, 245, 160, 20);
+        painelEditarVeiculo.add(lblInformePlaca);
+
+        txtEditarVeiculo = new JTextField();
+        txtEditarVeiculo.setBounds(285, 249, 217, 20);
+        painelEditarVeiculo.add(txtEditarVeiculo);
+        txtEditarVeiculo.setColumns(10);
+
+        btnEditarVeiculo = new JButton("Editar");
+        btnEditarVeiculo.setBounds(240, 345, 90, 25);
+        painelEditarVeiculo.add(btnEditarVeiculo);
+
+
+        btnExcluirVeiculo = new JButton("Excluir");
+        btnExcluirVeiculo.setBounds(340, 345, 90, 25);
+        painelEditarVeiculo.add(btnExcluirVeiculo);
+
+        btnCancelarExclusaoVeiculo = new JButton("Cancelar");
+        btnCancelarExclusaoVeiculo.setBounds(440, 345, 90, 25);
+        painelEditarVeiculo.add(btnCancelarExclusaoVeiculo);
+
+        evBotoes(btnEditarVeiculo);
+        evBotoes(btnExcluirVeiculo);
+        evBotoes(btnCancelarExclusao);
+        painelEditarVeiculo.setVisible(false);
+
+        return painelEditarVeiculo;
+    }
+
+    private JPanel painelIncluirLocacao(){
+        painelIncluirLocacao = new JPanel();
+        painelIncluirLocacao.setBounds(10, 11, 745, 545);
+        painelIncluirLocacao.setLayout(null);
+
+        JLabel lblNovaLocacao = new JLabel("Nova Locação");
+		lblNovaLocacao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNovaLocacao.setBounds(40, 62, 187, 34);
+		painelIncluirLocacao.add(lblNovaLocacao);
+
+        JLabel lblCnhLocacao = new JLabel("CNH");
+		lblCnhLocacao.setBounds(172, 163, 46, 14);
+		painelIncluirLocacao.add(lblCnhLocacao);
+
+        JLabel lblPlacaLocacao = new JLabel("Placa");
+		lblPlacaLocacao.setBounds(172, 194, 46, 14);
+		painelIncluirLocacao.add(lblPlacaLocacao);
+
+        JLabel lblDataInicio = new JLabel("Data Inicial");
+		lblDataInicio.setBounds(172, 227, 66, 14);
+		painelIncluirLocacao.add(lblDataInicio);
+
+        JLabel lblDataFim = new JLabel("Data Final");
+		lblDataFim.setBounds(172, 263, 66, 14);
+		painelIncluirLocacao.add(lblDataFim);
+
+        JLabel lblValor = new JLabel("Valor");
+		lblValor.setBounds(172, 293, 66, 14);
+		painelIncluirLocacao.add(lblValor);
+
+        txtCnhLocacao = new JTextField();
+		txtCnhLocacao.setBounds(283, 160, 217, 20);
+		painelIncluirLocacao.add(txtCnhLocacao);
+		txtCnhLocacao.setColumns(10);
+
+        txtPlacaLocacao = new JTextField();
+		txtPlacaLocacao.setColumns(10);
+		txtPlacaLocacao.setBounds(283, 191, 217, 20);
+		painelIncluirLocacao.add(txtPlacaLocacao);
+
+        txtDataInicio = new JTextField();
+		txtDataInicio.setColumns(10);
+		txtDataInicio.setBounds(283, 224, 217, 20);
+		painelIncluirLocacao.add(txtDataInicio);
+
+        txtDataFim = new JTextField();
+		txtDataFim.setColumns(10);
+		txtDataFim.setBounds(283, 255, 217, 20);
+		painelIncluirLocacao.add(txtDataFim);
+
+        txtValor = new JTextField();
+		txtValor.setColumns(10);
+		txtValor.setBounds(283, 293, 217, 20);
+		painelIncluirLocacao.add(txtValor);
+
+        btnLocacaoCancelar = new JButton("Cancelar");
+        btnLocacaoCancelar.setBounds(465, 407, 130, 23);
+        painelIncluirLocacao.add(btnLocacaoCancelar);
+
+        btnLocacaoLimpar = new JButton("Limpar");
+        btnLocacaoLimpar.setBounds(325, 407, 130, 23);
+        painelIncluirLocacao.add(btnLocacaoLimpar);
+
+        btnLocacaoSalvar = new JButton("Salvar");
+        btnLocacaoSalvar.setBounds(175, 407, 130, 23);
+        painelIncluirLocacao.add(btnLocacaoSalvar);
+
+        evBotoes(btnLocacaoCancelar);
+        evBotoes(btnLocacaoLimpar);
+        evBotoes(btnLocacaoSalvar);
+
+        painelIncluirLocacao.setVisible(false);
+
+        return painelIncluirLocacao;
+    }
 
     private void eventos(JMenuItem item) {
         item.addActionListener(new ActionListener() {
@@ -460,6 +584,11 @@ public class Janela extends JFrame {
                     painelListar.setVisible(true);
                 }
 
+                if(ev.getSource() == editarVeiculos){
+                    encerrarPaineis();
+                    painelEditarVeiculo.setVisible(true);
+                }
+
                 // Menu Categorias
                 if (ev.getSource() == listarCategoriasInicio) {
                     encerrarPaineis();
@@ -480,9 +609,12 @@ public class Janela extends JFrame {
                 if(ev.getSource() == listarLocacoes){
                     encerrarPaineis();
                     labelListar.setText("Teste");
-                    areaDeTexto.append(locacao.imprimeListaInicio());
+                    areaDeTexto.append(locacoes.imprimeListaInicio());
                     painelListar.setVisible(true);
-
+                }
+                if(ev.getSource() == incluirLocacoes){
+                    encerrarPaineis();
+                    painelIncluirLocacao.setVisible(true);
                 }
 
                 // Menu Sair
@@ -505,9 +637,11 @@ public class Janela extends JFrame {
             }
         });
 
-        // Painel Cadastrar Cliente
+       
         item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ev) {
+                
+                // Painel Cadastrar Cliente
                 if (ev.getSource() == btnClientesCancelar) {
                     encerrarPaineis();
                 }
@@ -515,24 +649,24 @@ public class Janela extends JFrame {
                     limparCampos();
                 }
                 if (ev.getSource() == btnClientesSalvar) {
-                        Cliente cliente = new Cliente(txtNome.getText(), Long.parseLong(txtCnh.getText()),
-                                Long.parseLong(txtTelefone.getText()), Long.parseLong(txtCpf.getText()));
+                        Cliente cliente = new Cliente(txtNome.getText(), converterParaLong(txtCnh.getText()),
+                            converterParaLong(txtTelefone.getText()), converterParaLong(txtCpf.getText()));
                         clientes.insereFim(cliente);
                         encerrarPaineis();
                 }
+
+                //Painel Editar Cliente
                 if (ev.getSource() == btnCancelarExclusao) {
                     encerrarPaineis();
                 }
                 if (ev.getSource() == btnExcluir) {
                     if (!clientes.estahVazia()) {
                         Object cliente = new Object();
-                        Long cpf = Long.parseLong(txtEditar.getText());
-                        cliente = clientes.procuraClientePorCpf(cpf);
+                        cliente = clientes.procuraClientePorCpf(converterParaLong(txtEditar.getText()));
                         clientes.remove(cliente);
                         encerrarPaineis();
                     }
                 }
-
                 if (ev.getSource() == btnEditar){
                     cpfAux = txtEditar.getText();
                     encerrarPaineis();      
@@ -541,7 +675,6 @@ public class Janela extends JFrame {
                     txtEditarCpf.setEditable(false);
                     cpfAux = "";
                 }
-
                 if (ev.getSource() == btnEditarClientesSalvar){
                     ((Cliente)clientes.procuraClientePorCpf(converterParaLong(txtEditarCpf.getText()))).setNome(txtEditarNome.getText());
                     ((Cliente)clientes.procuraClientePorCpf(converterParaLong(txtEditarCpf.getText()))).setTelefone(converterParaLong(txtEditarTelefone.getText()));
@@ -549,6 +682,37 @@ public class Janela extends JFrame {
                     encerrarPaineis();
                 }
                 if (ev.getSource() == btnEditarClientesCancelar){
+                    encerrarPaineis();
+                }
+
+                //Painel Editar Veiculo
+                if(ev.getSource() == btnCancelarExclusaoVeiculo){
+                    encerrarPaineis();
+                }
+                if(ev.getSource() == btnExcluirVeiculo){
+                    if (!veiculos.estahVazia()) {
+                        Object veiculo = new Object();
+                        veiculo = veiculos.procuraVeiculoPorPlaca(txtEditarVeiculo.getText());
+                        veiculos.remove(veiculo);
+                        encerrarPaineis();
+                        
+                    }
+                }
+
+                //Painel incluir locacao
+                if(ev.getSource() == btnLocacaoCancelar){
+                    encerrarPaineis();
+                }
+                if(ev.getSource() == btnLocacaoLimpar){
+                    limparCampos();
+                }
+                if(ev.getSource() == btnLocacaoSalvar){
+                    Locacao locacao = new Locacao(converterParaLong(txtCnhLocacao.getText()), txtPlacaLocacao.getText(),
+                        txtDataInicio.getText(), txtDataFim.getText(), Double.parseDouble(txtValor.getText()));  
+                    ((Cliente)clientes.procuraClientePorCnh(converterParaLong(txtCnhLocacao.getText()))).setLocacao(true);
+                    ((Veiculo)veiculos.procuraVeiculoPorPlaca(txtPlacaLocacao.getText())).setLocacao(true);
+
+                    locacoes.insereFim(locacao);
                     encerrarPaineis();
                 }
             }
@@ -562,6 +726,8 @@ public class Janela extends JFrame {
         painelCadastrarCliente.setVisible(false);
         painelEditar.setVisible(false);
         painelEditarCliente.setVisible(false);
+        painelEditarVeiculo.setVisible(false);
+        painelIncluirLocacao.setVisible(false);
     }
 
     private void limparCampos() {
@@ -570,6 +736,11 @@ public class Janela extends JFrame {
         txtTelefone.setText("");
         txtCpf.setText("");
         txtEditar.setText("");
+        txtEditarVeiculo.setText("");
+        txtCnhLocacao.setText("");
+        txtPlacaLocacao.setText("");
+        txtDataFim.setText("");
+        txtDataInicio.setText("");
     }
 
     private void dadosDoCliente(String cpf){
