@@ -7,6 +7,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -661,11 +662,15 @@ public class Janela extends JFrame {
                 }
                 if (ev.getSource() == btnExcluir) {
                     if (!clientes.estahVazia()) {
-                        Object cliente = new Object();
-                        cliente = clientes.procuraClientePorCpf(converterParaLong(txtEditar.getText()));
-                        clientes.remove(cliente);
-                        encerrarPaineis();
-                    }
+                        if(!clientes.clienteEmLocacao(converterParaLong(txtEditar.getText()))){
+                            Object cliente = new Object();
+                            cliente = clientes.procuraClientePorCpf(converterParaLong(txtEditar.getText()));
+                            clientes.remove(cliente);
+                            encerrarPaineis();
+                        } else {
+                         JOptionPane.showMessageDialog(null, "Cliente em locação de veículo.");
+                        } 
+                    }   
                 }
                 if (ev.getSource() == btnEditar){
                     cpfAux = txtEditar.getText();
@@ -692,9 +697,13 @@ public class Janela extends JFrame {
                 if(ev.getSource() == btnExcluirVeiculo){
                     if (!veiculos.estahVazia()) {
                         Object veiculo = new Object();
-                        veiculo = veiculos.procuraVeiculoPorPlaca(txtEditarVeiculo.getText());
-                        veiculos.remove(veiculo);
-                        encerrarPaineis();
+                        if(!veiculos.estaLocado(txtEditarVeiculo.getText())){
+                            veiculo = veiculos.procuraVeiculoPorPlaca(txtEditarVeiculo.getText());
+                            veiculos.remove(veiculo);
+                            encerrarPaineis();
+                        } else{
+                            JOptionPane.showMessageDialog(null, "Veículo locado");
+                        }
                         
                     }
                 }

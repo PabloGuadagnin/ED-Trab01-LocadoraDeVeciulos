@@ -22,5 +22,19 @@ public class CadVeiculos extends ListaObjetos {
         return null; 
     }
 
-
+    public boolean estaLocado(String placa) {
+        NohObjetos novoNoh = inicio;
+        while (novoNoh != null) {
+            Object obj = novoNoh.getObj();
+            if (obj instanceof Veiculo) {
+                Veiculo veiculo = (Veiculo) obj;
+                if (veiculo.getPlaca().equals(placa)) {
+                    return veiculo.getLocacao();
+                }
+            }
+            novoNoh = novoNoh.getProximo();
+        }
+        System.out.println("Não encontrado");
+        return false; 
+    }
 }

@@ -42,7 +42,7 @@ public class Veiculo {
     public String getCategoria() {return categoria;}
     public void setCategoria(String categoria) {this.categoria = categoria;}
 
-    public Boolean getBoolean() {return locacao;}
+    public Boolean getLocacao() {return locacao;}
     public void setLocacao(boolean locacao){this.locacao = locacao;}
 
     @Override

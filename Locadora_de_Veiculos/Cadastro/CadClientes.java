@@ -42,4 +42,21 @@ public class CadClientes extends ListaObjetos{
         return null; 
     }
 
+    public boolean clienteEmLocacao(long cpf) {
+        NohObjetos novoNoh = inicio;
+        while (novoNoh != null) {
+            Object obj = novoNoh.getObj();
+            if (obj instanceof Cliente) {
+                Cliente cliente = (Cliente) obj;
+                if (cliente.getCpf() == cpf) {
+                    return cliente.getLocacao();
+                }
+            }
+            novoNoh = novoNoh.getProximo();
+        }
+        System.out.println("Não encontrado");
+        return false; 
+    }
+
+
 }
